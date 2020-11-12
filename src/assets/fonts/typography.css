@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'Kondolar Thai';
+  src: url('./KondolarThai-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Kondolar Thai';
+  font-weight: 900;
+  src: url('./KondolarThai-Black.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Anuphan';
+  src: url('./Anuphan-Regular.otf') format('otf');
+}
+
+@font-face {
+  font-family: 'Anuphan';
+  font-weight: 600;
+  src: url('./Anuphan-SemiBold.otf') format('otf');
+}

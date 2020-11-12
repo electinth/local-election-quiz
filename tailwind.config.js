@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
@@ -5,7 +7,10 @@ module.exports = {
   },
   purge: ['src/**/*.vue'],
   theme: {
-    extend: {}
+    fontFamily: {
+      display: ['Kondolar Thai', ...defaultTheme.fontFamily.serif],
+      body: ['Anuphan', ...defaultTheme.fontFamily.sans]
+    }
   },
   variants: {},
   plugins: []
