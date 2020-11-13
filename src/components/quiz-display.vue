@@ -9,12 +9,20 @@
         @click="selectedChoice = choice"
       />
     </div>
-    <div class="flex flex-col" v-else>
+    <div class="flex flex-col space-y-4" v-else>
       <P class="my-8">เฉลย</P>
-      <ChoiceButton :choice="correctedChoice" isCorrected />
-      <P class="mx-2 mt-4">
+      <ChoiceButton :choice="correctChoice" isCorrect />
+      <P class="mx-2">
         {{ quiz.explanation }}
       </P>
+      <div class="flex flex-col">
+        <button
+          class="h-8 rounded-2xl hover:bg-white mx-auto m-8"
+          @click="onComplete"
+        >
+          <img src="../assets/images/next.svg" alt="ถัดไป" class="h-full" />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +46,12 @@ export interface Quiz {
   reference?: string;
 }
 
+export interface QuizResult {
+  no: number;
+  answer: ChoiceLetter;
+  isCorrect: boolean;
+}
+
 export default defineComponent({
   props: {
     quiz: {
@@ -50,7 +64,7 @@ export default defineComponent({
     H2,
     P
   },
-  setup(props) {
+  setup(props, { emit }) {
     const choices = computed<Choice[]>(() =>
       Object.values(ChoiceLetter).map(letter => ({
         letter,
@@ -58,16 +72,30 @@ export default defineComponent({
       }))
     );
 
-    const correctedChoice = computed<Choice | undefined>(() =>
+    const correctChoice = computed<Choice | undefined>(() =>
       choices.value.find(({ letter }) => letter === props.quiz.answer)
     );
 
     const selectedChoice = ref<Choice | undefined>();
 
+    const isCorrect = computed<boolean>(
+      () => selectedChoice.value?.letter === props.quiz.answer
+    );
+
+    const onComplete = () => {
+      emit('complete', {
+        no: props.quiz.no,
+        answer: selectedChoice.value?.letter,
+        isCorrect: isCorrect.value
+      } as QuizResult);
+    };
+
     return {
       choices,
       selectedChoice,
-      correctedChoice
+      correctChoice,
+      isCorrect,
+      onComplete
     };
   }
 });

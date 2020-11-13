@@ -1,10 +1,10 @@
 <template>
   <button class="flex flex-row space-x-1">
     <div
-      class="flex-1 text-center rounded border-2 px-2 h-16 flex"
+      class="flex-1 text-center rounded border-2 border-black px-2 h-16 flex"
       :class="{
-        'text-black bg-gray': !isCorrected,
-        'text-white bg-black': isCorrected
+        'text-black bg-gray': !isCorrect,
+        'text-white bg-black': isCorrect
       }"
     >
       <P class="m-auto">{{ choice.label }}</P>
@@ -29,7 +29,7 @@ export default defineComponent({
       type: Object as PropType<Choice>,
       required: true
     },
-    isCorrected: {
+    isCorrect: {
       type: Boolean,
       default: false
     }

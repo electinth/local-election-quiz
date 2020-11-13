@@ -1,15 +1,19 @@
 <template>
-  <div class="flex-1 bg-gray p-2 space-y-4">
+  <div class="flex-1 flex flex-col bg-gray p-2 space-y-4">
     <p class="text-center">
       {{ currentQuizNumber + 1 }}/{{ NUMBER_OF_SELECTED_QUIZ }}
     </p>
-    <QuizDisplay :quiz="currentQuiz" />
+    <QuizDisplay
+      class="flex-1"
+      :quiz="currentQuiz"
+      @complete="onQuizComplete"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import QuizDisplay, { Quiz } from '../components/quiz-display.vue';
+import QuizDisplay, { Quiz, QuizResult } from '../components/quiz-display.vue';
 import quizes from '../assets/data/quizes.json';
 import getRandomSubarray from '../utils/subarray';
 
@@ -20,6 +24,8 @@ export default defineComponent({
     QuizDisplay
   },
   setup() {
+    const results: QuizResult[] = [];
+
     const randomedQuizs = getRandomSubarray(
       quizes,
       NUMBER_OF_SELECTED_QUIZ
@@ -30,10 +36,16 @@ export default defineComponent({
       () => randomedQuizs[currentQuizNumber.value]
     );
 
+    const onQuizComplete = (result: QuizResult): void => {
+      results.push(result);
+      currentQuizNumber.value++;
+    };
+
     return {
       currentQuizNumber,
       NUMBER_OF_SELECTED_QUIZ,
-      currentQuiz
+      currentQuiz,
+      onQuizComplete
     };
   }
 });
