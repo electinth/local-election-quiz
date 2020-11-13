@@ -7,13 +7,8 @@
         class="h-8"
       />
     </div>
+    <div class="flex-1">
+      <router-view />
+    </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'App'
-});
-</script>
