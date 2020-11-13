@@ -9,7 +9,9 @@
         <H1>พร้อมแค่ไหน..<br />กับประชาธิปไตยใกล้มือ?</H1>
         <H3>วัดความรู้ความเข้าใจเกี่ยวกับ "เลือกตั้งท้องถิ่น”</H3>
       </div>
-      <Button>เริ่มเล่น</Button>
+      <router-link to="/quiz">
+        <Button>เริ่มเล่น</Button>
+      </router-link>
     </div>
     <div class="flex-1 w-full md:w-1/2 md:pr-12">
       <LottiePlayer :animationData="stepAnimation" />
