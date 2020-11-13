@@ -1,6 +1,8 @@
 <template>
-  <div class="flex-1 bg-gray">
-    <p>{{ currentQuizNumber + 1 }}/{{ NUMBER_OF_SELECTED_QUIZ }}</p>
+  <div class="flex-1 bg-gray p-2 space-y-4">
+    <p class="text-center">
+      {{ currentQuizNumber + 1 }}/{{ NUMBER_OF_SELECTED_QUIZ }}
+    </p>
     <QuizDisplay :quiz="currentQuiz" />
   </div>
 </template>
