@@ -9,11 +9,7 @@
         <H1>พร้อมแค่ไหน..<br />กับประชาธิปไตยใกล้มือ?</H1>
         <H3>วัดความรู้ความเข้าใจเกี่ยวกับ "เลือกตั้งท้องถิ่น”</H3>
       </div>
-      <button
-        class="rounded bg-white hover:bg-black hover:text-white border-black border-2 py-1 px-2 w-40 text-center"
-      >
-        เริ่มเล่น
-      </button>
+      <Button>เริ่มเล่น</Button>
     </div>
     <div class="flex-1 w-full md:w-1/2 md:pr-12">
       <LottiePlayer :animationData="stepAnimation" />
@@ -27,12 +23,14 @@ import LottiePlayer from '../components/lottie-player.vue';
 import stepAnimation from '../assets/lotties/step.json';
 import H1 from '../components/typography/h1.vue';
 import H3 from '../components/typography/h3.vue';
+import Button from '../components/button.vue';
 
 export default defineComponent({
   components: {
     LottiePlayer,
     H1,
-    H3
+    H3,
+    Button
   },
   setup() {
     return {
