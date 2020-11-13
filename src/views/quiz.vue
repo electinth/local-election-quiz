@@ -1,37 +1,37 @@
 <template>
-  <div>
-    {{ selectedQuizs }}
+  <div class="flex-1 bg-gray">
+    <p>{{ currentQuizNumber + 1 }}/{{ NUMBER_OF_SELECTED_QUIZ }}</p>
+    <QuizDisplay :quiz="currentQuiz" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
+import QuizDisplay, { Quiz } from '../components/quiz-display.vue';
 import quizes from '../assets/data/quizes.json';
 import getRandomSubarray from '../utils/subarray';
 
 const NUMBER_OF_SELECTED_QUIZ = 8;
 
-interface Quiz {
-  no: number;
-  question: string;
-  A: string;
-  B: string;
-  C: string;
-  D: string;
-  answer: 'A' | 'B' | 'C' | 'D';
-  explanation: string;
-  reference?: string;
-}
-
 export default defineComponent({
+  components: {
+    QuizDisplay
+  },
   setup() {
-    const selectedQuizs = getRandomSubarray(
+    const randomedQuizs = getRandomSubarray(
       quizes,
       NUMBER_OF_SELECTED_QUIZ
     ) as Quiz[];
 
+    const currentQuizNumber = ref(0);
+    const currentQuiz = computed<Quiz>(
+      () => randomedQuizs[currentQuizNumber.value]
+    );
+
     return {
-      selectedQuizs
+      currentQuizNumber,
+      NUMBER_OF_SELECTED_QUIZ,
+      currentQuiz
     };
   }
 });

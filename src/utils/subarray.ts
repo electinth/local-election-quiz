@@ -1,9 +1,10 @@
 export default function getRandomSubarray<T>(arr: T[], size: number): T[] {
-  let shuffled = arr.slice(0),
-    i = arr.length,
-    min = i - size,
+  let i = arr.length,
     temp,
     index;
+
+  const shuffled = arr.slice(0),
+    min = i - size;
 
   while (i-- > min) {
     index = Math.floor((i + 1) * Math.random());
