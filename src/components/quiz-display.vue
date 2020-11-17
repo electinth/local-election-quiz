@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from 'vue';
+import { computed, defineComponent, PropType, ref, watch } from 'vue';
 import { ChoiceLetter } from '../constants/choice-letter';
 import ChoiceButton, { Choice } from './choice-button.vue';
 import H2 from './typography/h2.vue';
@@ -77,6 +77,13 @@ export default defineComponent({
     );
 
     const selectedChoice = ref<Choice | undefined>();
+
+    watch(
+      () => props.quiz.no,
+      () => {
+        selectedChoice.value = undefined;
+      }
+    );
 
     const isCorrect = computed<boolean>(
       () => selectedChoice.value?.letter === props.quiz.answer
