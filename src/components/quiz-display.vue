@@ -43,7 +43,6 @@ export interface Quiz {
   [ChoiceLetter.D]: string;
   answer: ChoiceLetter;
   explanation: string;
-  reference?: string;
 }
 
 export interface QuizResult {

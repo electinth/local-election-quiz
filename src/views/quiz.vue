@@ -38,7 +38,12 @@ export default defineComponent({
 
     const onQuizComplete = (result: QuizResult): void => {
       results.push(result);
-      currentQuizNumber.value++;
+
+      if (currentQuizNumber.value < NUMBER_OF_SELECTED_QUIZ - 1) {
+        currentQuizNumber.value++;
+      } else {
+        console.log('finish', results);
+      }
     };
 
     return {
