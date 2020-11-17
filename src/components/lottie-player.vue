@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent, ref, onMounted, watch } from 'vue';
 import lottie, { AnimationConfigWithData } from 'lottie-web';
 
 export default defineComponent({
@@ -15,13 +15,18 @@ export default defineComponent({
     config: {
       type: AnimationConfigWithData,
       default: {}
+    },
+    isPlaying: {
+      type: Boolean,
+      default: true
     }
   },
   setup(props) {
     const container = ref(null);
+    const animation = ref(null);
 
     onMounted(() => {
-      lottie.loadAnimation({
+      animation.value = lottie.loadAnimation({
         animationData: props.animationData,
         container: container.value,
         autoplay: true,
@@ -29,6 +34,17 @@ export default defineComponent({
         ...props.config
       });
     });
+
+    watch(
+      () => props.isPlaying,
+      () => {
+        if (props.isPlaying) {
+          animation.value.play();
+        } else {
+          animation.value.stop();
+        }
+      }
+    );
 
     return {
       container

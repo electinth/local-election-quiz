@@ -1,22 +1,37 @@
 <template>
-  <button class="flex flex-row space-x-1">
+  <button
+    class="flex flex-row space-x-1 h-20 md:h-24"
+    @mouseenter="isHovering = true"
+    @mouseleave="isHovering = false"
+  >
     <div
-      class="flex-1 text-center rounded border-2 border-black px-2 h-20 flex"
-      :class="{
-        'text-black bg-gray': !isCorrect,
-        'text-white bg-black': isCorrect
-      }"
+      class="flex-1 text-center rounded border-2 border-black px-2 flex"
+      :class="[
+        isCorrect
+          ? 'text-white bg-black'
+          : isHovering
+          ? 'text-black bg-darkgray'
+          : 'text-black bg-gray'
+      ]"
     >
       <H3 class="m-auto">{{ choice.label }}</H3>
     </div>
-    <div class="w-1/6 rounded border-2 bg-white"></div>
+    <div class="w-1/6 rounded border-2 bg-white p-1 md:p-2">
+      <LottiePlayer
+        :animationData="chooseAnimation"
+        :config="{ autoplay: isCorrect }"
+        :isPlaying="isCorrect || isHovering"
+      />
+    </div>
   </button>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
+import LottiePlayer from './lottie-player.vue';
 import { ChoiceLetter } from '../constants/choice-letter';
 import H3 from './typography/h3.vue';
+import chooseAnimation from '../assets/lotties/choose.json';
 
 export interface Choice {
   letter: ChoiceLetter;
@@ -35,7 +50,16 @@ export default defineComponent({
     }
   },
   components: {
-    H3
+    H3,
+    LottiePlayer
+  },
+  setup() {
+    const isHovering = ref(false);
+
+    return {
+      chooseAnimation,
+      isHovering
+    };
   }
 });
 </script>

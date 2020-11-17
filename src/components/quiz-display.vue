@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col space-y-4 py-4">
+  <div class="flex flex-col space-y-4 md:space-y-6 py-4">
     <p v-if="!selectedChoice" class="text-center">
       {{ progressText }}
     </p>
@@ -7,7 +7,7 @@
 
     <H2 class="text-center font-black">{{ quiz.question }}</H2>
 
-    <div v-if="!selectedChoice" class="flex flex-col space-y-2">
+    <div v-if="!selectedChoice" class="flex flex-col space-y-2 md:space-y-3">
       <ChoiceButton
         v-for="choice in choices"
         :key="choice.letter"
@@ -15,7 +15,7 @@
         @click="selectedChoice = choice"
       />
     </div>
-    <div class="flex flex-col space-y-4" v-else>
+    <div class="flex flex-col space-y-4 md:space-y-6" v-else>
       <div class="flex flex-row space-x-2 mx-auto">
         <HorizontalLine />
         <P class="font-bold">เฉลย</P>
