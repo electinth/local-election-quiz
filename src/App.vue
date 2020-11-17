@@ -10,3 +10,17 @@
     <router-view />
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent, provide, ref } from 'vue';
+import { QuizResult } from './components/quiz-display.vue';
+import { ProviderName } from './constants/provider';
+
+export default defineComponent({
+  setup() {
+    const results = ref<QuizResult>([]);
+
+    provide(ProviderName.Results, results);
+  }
+});
+</script>

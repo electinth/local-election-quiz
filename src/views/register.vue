@@ -29,7 +29,7 @@
       </div>
       <div class="flex flex-col text-center space-y-2">
         <Button class="mx-auto" @click="submit">ส่งคำตอบ</Button>
-        <router-link to="/" class="underline"><P>ข้าม</P></router-link>
+        <router-link to="/result" class="underline"><P>ข้าม</P></router-link>
       </div>
     </div>
   </div>
@@ -41,6 +41,7 @@ import Button from '../components/button.vue';
 import H2 from '../components/typography/h2.vue';
 import P from '../components/typography/p.vue';
 import Label from '../components/typography/label.vue';
+import router from '@/router';
 
 export default defineComponent({
   components: {
@@ -55,6 +56,7 @@ export default defineComponent({
 
     const submit = () => {
       console.log(age.value, province.value);
+      router.push('/result');
     };
 
     return {

@@ -10,20 +10,21 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, inject, Ref, ref } from 'vue';
 import QuizDisplay, { Quiz, QuizResult } from '../components/quiz-display.vue';
 import quizes from '../assets/data/quizes.json';
 import getRandomSubarray from '../utils/subarray';
 import router from '@/router';
+import { ProviderName } from '@/constants/provider';
 
-const NUMBER_OF_SELECTED_QUIZ = 8;
+export const NUMBER_OF_SELECTED_QUIZ = 8;
 
 export default defineComponent({
   components: {
     QuizDisplay
   },
   setup() {
-    const results: QuizResult[] = [];
+    const results = inject(ProviderName.Results) as Ref<QuizResult[]>;
 
     const randomedQuizs = getRandomSubarray(
       quizes,
@@ -40,7 +41,7 @@ export default defineComponent({
     );
 
     const onQuizComplete = (result: QuizResult): void => {
-      results.push(result);
+      results.value = [...results.value, result];
 
       if (currentQuizNumber.value < NUMBER_OF_SELECTED_QUIZ - 1) {
         currentQuizNumber.value++;
