@@ -1,11 +1,9 @@
 <template>
-  <div class="flex-1 flex flex-col bg-gray p-2 space-y-4">
-    <p class="text-center">
-      {{ currentQuizNumber + 1 }}/{{ NUMBER_OF_SELECTED_QUIZ }}
-    </p>
+  <div class="flex-1 flex flex-col bg-gray p-3 space-y-4">
     <QuizDisplay
       class="flex-1"
       :quiz="currentQuiz"
+      :progressText="progressText"
       @complete="onQuizComplete"
     />
   </div>
@@ -36,6 +34,10 @@ export default defineComponent({
       () => randomedQuizs[currentQuizNumber.value]
     );
 
+    const progressText = computed(
+      () => `${currentQuizNumber.value + 1}/${NUMBER_OF_SELECTED_QUIZ}`
+    );
+
     const onQuizComplete = (result: QuizResult): void => {
       results.push(result);
 
@@ -47,8 +49,7 @@ export default defineComponent({
     };
 
     return {
-      currentQuizNumber,
-      NUMBER_OF_SELECTED_QUIZ,
+      progressText,
       currentQuiz,
       onQuizComplete
     };

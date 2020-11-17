@@ -7,7 +7,7 @@
     >
       <div class="text-center md:text-left space-y-4">
         <H1>พร้อมแค่ไหน..<br />กับประชาธิปไตยใกล้มือ?</H1>
-        <H3>วัดความรู้ความเข้าใจเกี่ยวกับ "เลือกตั้งท้องถิ่น”</H3>
+        <H2>วัดความรู้ความเข้าใจเกี่ยวกับ "เลือกตั้งท้องถิ่น”</H2>
       </div>
       <router-link to="/quiz">
         <Button>เริ่มเล่น</Button>
@@ -24,14 +24,14 @@ import { defineComponent } from 'vue';
 import LottiePlayer from '../components/lottie-player.vue';
 import stepAnimation from '../assets/lotties/step.json';
 import H1 from '../components/typography/h1.vue';
-import H3 from '../components/typography/h3.vue';
+import H2 from '../components/typography/h2.vue';
 import Button from '../components/button.vue';
 
 export default defineComponent({
   components: {
     LottiePlayer,
     H1,
-    H3,
+    H2,
     Button
   },
   setup() {
