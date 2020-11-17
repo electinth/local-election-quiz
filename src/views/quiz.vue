@@ -17,7 +17,7 @@ import getRandomSubarray from '../utils/subarray';
 import router from '@/router';
 import { ProviderName } from '@/constants/provider';
 
-export const NUMBER_OF_SELECTED_QUIZ = 8;
+export const NUMBER_OF_SELECTED_QUIZ = 7;
 
 export default defineComponent({
   components: {
