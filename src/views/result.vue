@@ -21,6 +21,37 @@
         :class="{ 'opacity-25': rank !== index }"
       />
     </div>
+    <div class="flex flex-col md:flex-row px-2">
+      <div
+        class="md:flex-1 flex flex-row bg-black border-2 border-black text-white h-12 p-1 justify-center space-x-4"
+      >
+        <P class="my-auto">Share</P>
+        <img
+          class="h-full"
+          src="../assets/images/social-facebook.svg"
+          alt="Facebook"
+        />
+        <img
+          class="h-full"
+          src="../assets/images/social-twitter.svg"
+          alt="Twitter"
+        />
+        <img class="h-full" src="../assets/images/social-line.svg" alt="Line" />
+      </div>
+      <router-link
+        to="/quiz"
+        class="md:flex-1 flex border-2 h-12 hover:underline"
+      >
+        <P class="m-auto">เล่นใหม่</P>
+      </router-link>
+      <a
+        href="https://www.kpi-corner.com/content/8087/local00015"
+        target="_blank"
+        class="md:flex-1 flex border-2 h-12 border-t-0 md:border-t-2 md:border-l-0 hover:underline"
+      >
+        <P class="m-auto">อ่านข้อมูลเพิ่มเติม</P>
+      </a>
+    </div>
   </div>
 </template>
 
