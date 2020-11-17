@@ -1,7 +1,7 @@
 <template>
   <div class="flex-1 flex flex-col bg-gray p-3 space-y-4">
     <QuizDisplay
-      class="flex-1"
+      class="flex-1 max-w-screen-lg m-auto"
       :quiz="currentQuiz"
       :progressText="progressText"
       @complete="onQuizComplete"
@@ -14,6 +14,7 @@ import { computed, defineComponent, ref } from 'vue';
 import QuizDisplay, { Quiz, QuizResult } from '../components/quiz-display.vue';
 import quizes from '../assets/data/quizes.json';
 import getRandomSubarray from '../utils/subarray';
+import router from '@/router';
 
 const NUMBER_OF_SELECTED_QUIZ = 8;
 
@@ -44,7 +45,7 @@ export default defineComponent({
       if (currentQuizNumber.value < NUMBER_OF_SELECTED_QUIZ - 1) {
         currentQuizNumber.value++;
       } else {
-        console.log('finish', results);
+        router.push('/register');
       }
     };
 
