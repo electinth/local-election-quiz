@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col space-y-6 py-4">
+  <div class="flex flex-col space-y-4 py-4">
     <p v-if="!selectedChoice" class="text-center">
       {{ progressText }}
     </p>
@@ -16,14 +16,18 @@
       />
     </div>
     <div class="flex flex-col space-y-4" v-else>
-      <P class="">เฉลย</P>
+      <div class="flex flex-row space-x-2 mx-auto">
+        <HorizontalLine />
+        <P class="font-bold">เฉลย</P>
+        <HorizontalLine />
+      </div>
       <ChoiceButton :choice="correctChoice" isCorrect />
       <P class="mx-2">
         {{ quiz.explanation }}
       </P>
       <div class="flex flex-col">
         <button
-          class="h-8 rounded-2xl hover:bg-white mx-auto m-8"
+          class="h-8 rounded-2xl hover:bg-white mx-auto m-6"
           @click="onComplete"
         >
           <img src="../assets/images/next.svg" alt="ถัดไป" class="h-full" />
@@ -38,6 +42,7 @@ import { computed, defineComponent, PropType, ref, watch } from 'vue';
 import { ChoiceLetter } from '../constants/choice-letter';
 import ChoiceButton, { Choice } from './choice-button.vue';
 import ResultBadge from './result-badge.vue';
+import HorizontalLine from './horizontal-line.vue';
 import H2 from './typography/h2.vue';
 import P from './typography/p.vue';
 
@@ -72,6 +77,7 @@ export default defineComponent({
   components: {
     ChoiceButton,
     ResultBadge,
+    HorizontalLine,
     H2,
     P
   },
