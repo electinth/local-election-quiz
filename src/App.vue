@@ -12,13 +12,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, provide, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { ProviderName } from './constants/provider';
+import providePersistRef from './utils/persist-ref-provider';
 
 export default defineComponent({
   setup() {
-    provide(ProviderName.UserId, ref<string>());
-    provide(ProviderName.Score, ref<number>(0));
+    providePersistRef(ProviderName.UserId);
+    providePersistRef(ProviderName.Score);
   }
 });
 </script>
