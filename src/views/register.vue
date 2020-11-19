@@ -36,12 +36,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, inject, Ref, ref } from 'vue';
 import Button from '../components/button.vue';
 import H2 from '../components/typography/h2.vue';
 import P from '../components/typography/p.vue';
 import Label from '../components/typography/label.vue';
 import router from '@/router';
+import { ProviderName } from '@/constants/provider';
+import { submitDemographicData } from '@/utils/database';
 
 export default defineComponent({
   components: {
@@ -51,11 +53,19 @@ export default defineComponent({
     Label
   },
   setup() {
-    const age = ref();
-    const province = ref();
+    const userId = inject(ProviderName.UserId) as Ref<string>;
+
+    const age = ref<number>();
+    const province = ref<string>();
 
     const submit = () => {
-      console.log(age.value, province.value);
+      if (age.value && province.value) {
+        submitDemographicData(userId.value, {
+          age: age.value,
+          province: province.value
+        });
+      }
+
       router.push('/result');
     };
 

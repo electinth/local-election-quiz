@@ -21,3 +21,10 @@ export const submitAnAnswer = (
     [quizNumber]: answer
   });
 };
+
+export const submitDemographicData = (
+  userId: string,
+  demographicData: { age: number; province: string }
+): void => {
+  database.ref(userId).update(demographicData);
+};
