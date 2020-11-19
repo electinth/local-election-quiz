@@ -1,3 +1,4 @@
 export enum ProviderName {
-  Results = 'results'
+  Results = 'results',
+  UserId = 'userId'
 }

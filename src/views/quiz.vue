@@ -11,9 +11,10 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject, Ref, ref } from 'vue';
-import QuizDisplay, { Quiz, QuizResult } from '../components/quiz-display.vue';
-import quizes from '../assets/data/quizes.json';
-import getRandomSubarray from '../utils/subarray';
+import QuizDisplay, { Quiz, QuizResult } from '@/components/quiz-display.vue';
+import quizes from '@/assets/data/quizes.json';
+import getRandomSubarray from '@/utils/subarray';
+import { submitAnAnswer } from '@/utils/database';
 import router from '@/router';
 import { ProviderName } from '@/constants/provider';
 
@@ -24,6 +25,8 @@ export default defineComponent({
     QuizDisplay
   },
   setup() {
+    const userId = inject(ProviderName.UserId) as string;
+
     const results = inject(ProviderName.Results) as Ref<QuizResult[]>;
 
     const randomedQuizs = getRandomSubarray(
@@ -42,6 +45,7 @@ export default defineComponent({
 
     const onQuizComplete = (result: QuizResult): void => {
       results.value = [...results.value, result];
+      submitAnAnswer(userId, result.no, result.answer);
 
       if (currentQuizNumber.value < NUMBER_OF_SELECTED_QUIZ - 1) {
         currentQuizNumber.value++;
