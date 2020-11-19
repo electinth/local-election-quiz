@@ -4,6 +4,7 @@
       class="flex-1 max-w-screen-lg m-auto"
       :quiz="currentQuiz"
       :progressText="progressText"
+      @answer="onAnswerSubmitted"
       @complete="onQuizComplete"
     />
   </div>
@@ -43,10 +44,12 @@ export default defineComponent({
       () => `${currentQuizNumber.value + 1}/${NUMBER_OF_SELECTED_QUIZ}`
     );
 
-    const onQuizComplete = (result: QuizResult): void => {
+    const onAnswerSubmitted = (result: QuizResult): void => {
       results.value = [...results.value, result];
       submitAnAnswer(userId, result.no, result.answer);
+    };
 
+    const onQuizComplete = (): void => {
       if (currentQuizNumber.value < NUMBER_OF_SELECTED_QUIZ - 1) {
         currentQuizNumber.value++;
       } else {
@@ -57,6 +60,7 @@ export default defineComponent({
     return {
       progressText,
       currentQuiz,
+      onAnswerSubmitted,
       onQuizComplete
     };
   }

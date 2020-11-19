@@ -12,7 +12,7 @@
         v-for="choice in choices"
         :key="choice.letter"
         :choice="choice"
-        @click="selectedChoice = choice"
+        @click="onAnswerSubmitted(choice)"
       />
     </div>
     <div class="flex flex-col space-y-4 md:space-y-6" v-else>
@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref, watch } from 'vue';
-import { ChoiceLetter } from '../constants/choice-letter';
+import { ChoiceLetter } from '@/constants/choice-letter';
 import ChoiceButton, { Choice } from './choice-button.vue';
 import ResultBadge from './result-badge.vue';
 import HorizontalLine from './horizontal-line.vue';
@@ -102,16 +102,21 @@ export default defineComponent({
       }
     );
 
-    const isCorrect = computed<boolean>(
-      () => selectedChoice.value?.letter === props.quiz.answer
-    );
+    const isCorrect = ref<boolean>();
 
-    const onComplete = () => {
-      emit('complete', {
+    const onAnswerSubmitted = (choice: Choice) => {
+      selectedChoice.value = choice;
+      isCorrect.value = choice.letter === props.quiz.answer;
+
+      emit('answer', {
         no: props.quiz.no,
-        answer: selectedChoice.value?.letter,
+        answer: choice.letter,
         isCorrect: isCorrect.value
       } as QuizResult);
+    };
+
+    const onComplete = () => {
+      emit('complete');
     };
 
     return {
@@ -119,6 +124,7 @@ export default defineComponent({
       selectedChoice,
       correctChoice,
       isCorrect,
+      onAnswerSubmitted,
       onComplete
     };
   }
