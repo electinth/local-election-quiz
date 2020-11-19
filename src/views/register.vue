@@ -19,12 +19,7 @@
         </div>
         <div class="flex flex-row space-x-2">
           <Label for="province" class="w-20 my-auto text-right">จังหวัด</Label>
-          <input
-            type="text"
-            for="province"
-            v-model.trim="province"
-            class="flex-1 px-4 py-2 border-2"
-          />
+          <ProvinceInput v-model="province" />
         </div>
       </div>
       <div class="flex flex-col text-center space-y-2">
@@ -37,10 +32,11 @@
 
 <script lang="ts">
 import { defineComponent, inject, Ref, ref } from 'vue';
-import Button from '../components/button.vue';
-import H2 from '../components/typography/h2.vue';
-import P from '../components/typography/p.vue';
-import Label from '../components/typography/label.vue';
+import Button from '@/components/button.vue';
+import H2 from '@/components/typography/h2.vue';
+import P from '@/components/typography/p.vue';
+import Label from '@/components/typography/label.vue';
+import ProvinceInput from '@/components/province-input.vue';
 import router from '@/router';
 import { ProviderName } from '@/constants/provider';
 import { submitDemographicData } from '@/utils/database';
@@ -50,7 +46,8 @@ export default defineComponent({
     Button,
     H2,
     P,
-    Label
+    Label,
+    ProvinceInput
   },
   setup() {
     const userId = inject(ProviderName.UserId) as Ref<string>;
@@ -59,14 +56,16 @@ export default defineComponent({
     const province = ref<string>();
 
     const submit = () => {
+      console.log(age.value, province.value);
+
       if (age.value && province.value) {
         submitDemographicData(userId.value, {
           age: age.value,
           province: province.value
         });
-      }
 
-      router.push('/result');
+        router.push('/result');
+      }
     };
 
     return {
