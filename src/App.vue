@@ -18,7 +18,7 @@ import { ProviderName } from './constants/provider';
 
 export default defineComponent({
   setup() {
-    const results = ref<QuizResult>([]);
+    const results = ref<QuizResult[]>([]);
 
     provide(ProviderName.Results, results);
   }

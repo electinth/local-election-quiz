@@ -71,7 +71,7 @@ import step2Animation from '../assets/lotties/step2.json';
 import step3Animation from '../assets/lotties/step3.json';
 
 interface ResultDetail {
-  scoreRange: [Number, Number];
+  scoreRange: Number[];
   character: string;
   description: string;
 }
@@ -96,11 +96,11 @@ export default defineComponent({
     );
 
     const rank = computed<Number>(() =>
-      resultDetails.findIndex(isScoreInRange(score.value))
+      (resultDetails as ResultDetail[]).findIndex(isScoreInRange(score.value))
     );
 
-    const resultDetail = computed<Number>(() =>
-      resultDetails.find(isScoreInRange(score.value))
+    const resultDetail = computed<ResultDetail | undefined>(() =>
+      (resultDetails as ResultDetail[]).find(isScoreInRange(score.value))
     );
 
     return {
