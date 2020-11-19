@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject, Ref, ref } from 'vue';
+import { v4 as uuidv4 } from 'uuid';
 import QuizDisplay, { Quiz, QuizResult } from '@/components/quiz-display.vue';
 import quizes from '@/assets/data/quizes.json';
 import getRandomSubarray from '@/utils/subarray';
@@ -26,9 +27,11 @@ export default defineComponent({
     QuizDisplay
   },
   setup() {
-    const userId = inject(ProviderName.UserId) as string;
+    const userId = inject(ProviderName.UserId) as Ref<string>;
+    const score = inject(ProviderName.Score) as Ref<number>;
 
-    const results = inject(ProviderName.Results) as Ref<QuizResult[]>;
+    userId.value = uuidv4();
+    score.value = 0;
 
     const randomedQuizs = getRandomSubarray(
       quizes,
@@ -45,8 +48,11 @@ export default defineComponent({
     );
 
     const onAnswerSubmitted = (result: QuizResult): void => {
-      results.value = [...results.value, result];
-      submitAnAnswer(userId, result.no, result.answer);
+      if (result.isCorrect) {
+        score.value++;
+      }
+
+      submitAnAnswer(userId.value, result.no, result.answer);
     };
 
     const onQuizComplete = (): void => {

@@ -57,7 +57,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, inject, Ref } from 'vue';
-import { QuizResult } from '@/components/quiz-display.vue';
 import { ProviderName } from '@/constants/provider';
 import { NUMBER_OF_SELECTED_QUIZ } from './quiz.vue';
 import LottiePlayer from '../components/lottie-player.vue';
@@ -89,11 +88,7 @@ export default defineComponent({
     LottiePlayer
   },
   setup() {
-    const results = inject(ProviderName.Results) as Ref<QuizResult[]>;
-
-    const score = computed(
-      () => results.value.filter(({ isCorrect }) => isCorrect).length
-    );
+    const score = inject(ProviderName.Score) as Ref<number>;
 
     const rank = computed<Number>(() =>
       (resultDetails as ResultDetail[]).findIndex(isScoreInRange(score.value))

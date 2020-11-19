@@ -12,15 +12,13 @@
 </template>
 
 <script lang="ts">
-import { v4 as uuidv4 } from 'uuid';
 import { defineComponent, provide, ref } from 'vue';
-import { QuizResult } from './components/quiz-display.vue';
 import { ProviderName } from './constants/provider';
 
 export default defineComponent({
   setup() {
-    provide(ProviderName.UserId, uuidv4());
-    provide(ProviderName.Results, ref<QuizResult[]>([]));
+    provide(ProviderName.UserId, ref<string>());
+    provide(ProviderName.Score, ref<number>(0));
   }
 });
 </script>
