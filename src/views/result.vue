@@ -22,22 +22,7 @@
       />
     </div>
     <div class="flex flex-col md:flex-row px-2">
-      <div
-        class="md:flex-1 flex flex-row bg-black border-2 border-black text-white h-12 p-1 justify-center space-x-4"
-      >
-        <P class="my-auto">Share</P>
-        <img
-          class="h-full"
-          src="../assets/images/social-facebook.svg"
-          alt="Facebook"
-        />
-        <img
-          class="h-full"
-          src="../assets/images/social-twitter.svg"
-          alt="Twitter"
-        />
-        <img class="h-full" src="../assets/images/social-line.svg" alt="Line" />
-      </div>
+      <SocialSharer :score="score" class="md:flex-1" />
       <router-link
         to="/quiz"
         class="md:flex-1 flex border-2 h-12 hover:underline"
@@ -59,15 +44,16 @@
 import { computed, defineComponent, inject, Ref } from 'vue';
 import { ProviderName } from '@/constants/provider';
 import { NUMBER_OF_SELECTED_QUIZ } from './quiz.vue';
-import LottiePlayer from '../components/lottie-player.vue';
-import H1 from '../components/typography/h1.vue';
-import H2 from '../components/typography/h2.vue';
-import H3 from '../components/typography/h3.vue';
-import P from '../components/typography/p.vue';
-import resultDetails from '../assets/data/results.json';
-import step1Animation from '../assets/lotties/step1.json';
-import step2Animation from '../assets/lotties/step2.json';
-import step3Animation from '../assets/lotties/step3.json';
+import LottiePlayer from '@/components/lottie-player.vue';
+import SocialSharer from '@/components/social-sharer.vue';
+import H1 from '@/components/typography/h1.vue';
+import H2 from '@/components/typography/h2.vue';
+import H3 from '@/components/typography/h3.vue';
+import P from '@/components/typography/p.vue';
+import resultDetails from '@/assets/data/results.json';
+import step1Animation from '@/assets/lotties/step1.json';
+import step2Animation from '@/assets/lotties/step2.json';
+import step3Animation from '@/assets/lotties/step3.json';
 
 interface ResultDetail {
   scoreRange: Number[];
@@ -85,7 +71,8 @@ export default defineComponent({
     H2,
     H3,
     P,
-    LottiePlayer
+    LottiePlayer,
+    SocialSharer
   },
   setup() {
     const score = inject(ProviderName.Score) as Ref<number>;
