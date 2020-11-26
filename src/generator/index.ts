@@ -7,6 +7,9 @@ import {
   rmdirSync,
   writeFileSync
 } from 'fs';
+import { config } from 'dotenv';
+
+config();
 
 const TEMPLATE_PATH = 'src/generator/share.html';
 const PUBLIC_PATH = 'public/';
@@ -14,7 +17,7 @@ const IMAGES_PATH = 'og/score/';
 const OUTPUT_PATH = 'dist/share/';
 
 const data = {
-  url: '',
+  url: process.env.VUE_APP_HOST_DOMAIN,
   title: 'พร้อมแค่ไหน.. กับประชาธิปไตยใกล้มือ?',
   description: 'วัดความรู้ความเข้าใจเกี่ยวกับ เลือกตั้งท้องถิ่น'
 };
