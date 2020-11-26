@@ -21,6 +21,9 @@
           <Label for="province" class="w-20 my-auto text-right">จังหวัด</Label>
           <ProvinceInput v-model="province" />
         </div>
+        <P v-if="isDirty && isError" class="text-red text-center"
+          >*กรุณาพิมพ์คำตอบเพื่อส่งหรือกดข้าม</P
+        >
       </div>
       <div class="flex flex-col text-center space-y-2">
         <Button class="mx-auto" @click="submit">ส่งคำตอบ</Button>
@@ -31,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, Ref, ref } from 'vue';
+import { computed, defineComponent, inject, Ref, ref } from 'vue';
 import Button from '@/components/button.vue';
 import H2 from '@/components/typography/h2.vue';
 import P from '@/components/typography/p.vue';
@@ -55,8 +58,15 @@ export default defineComponent({
     const age = ref<number>();
     const province = ref<string>();
 
+    const isDirty = ref<boolean>(false);
+    const isError = computed<boolean>(() => !age.value || !province.value);
+
     const submit = () => {
-      console.log(age.value, province.value);
+      isDirty.value = true;
+
+      if (isError.value) {
+        return;
+      }
 
       if (age.value && province.value) {
         submitDemographicData(userId.value, {
@@ -71,7 +81,9 @@ export default defineComponent({
     return {
       age,
       province,
-      submit
+      submit,
+      isDirty,
+      isError
     };
   }
 });
