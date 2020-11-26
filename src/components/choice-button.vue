@@ -5,7 +5,7 @@
     @mouseleave="isHovering = false"
   >
     <div
-      class="flex-1 text-center rounded border-2 border-black px-2 flex"
+      class="flex-1 text-center rounded border-2 border-black px-2 flex h-full"
       :class="[
         isCorrect
           ? 'text-white bg-black'
@@ -16,7 +16,7 @@
     >
       <H3 class="m-auto">{{ choice.label }}</H3>
     </div>
-    <div class="w-1/6 rounded border-2 bg-white p-1 md:p-2">
+    <div class="w-1/6 rounded border-2 bg-white p-1 md:p-2 h-full">
       <LottiePlayer
         :animationData="chooseAnimation"
         :config="{ autoplay: isCorrect }"
