@@ -11,11 +11,11 @@
 
 @font-face {
   font-family: 'Anuphan';
-  src: url('./Anuphan-Regular.otf') format('otf');
+  src: url('./Anuphan-Regular.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'Anuphan';
   font-weight: 600;
-  src: url('./Anuphan-SemiBold.otf') format('otf');
+  src: url('./Anuphan-SemiBold.otf') format('opentype');
 }
