@@ -17,7 +17,6 @@ const IMAGES_PATH = 'og/score/';
 const OUTPUT_PATH = 'dist/share/';
 
 const data = {
-  url: process.env.VUE_APP_HOST_DOMAIN,
   title: 'พร้อมแค่ไหน.. กับประชาธิปไตยใกล้มือ?',
   description: 'วัดความรู้ความเข้าใจเกี่ยวกับ เลือกตั้งท้องถิ่น'
 };
@@ -34,10 +33,14 @@ if (existsSync(OUTPUT_PATH)) {
 mkdirSync(OUTPUT_PATH);
 
 images.forEach(image => {
-  const output = render(template, { ...data, image: IMAGES_PATH + image });
-  const outputName = image.split('.')[0] + '.html';
+  const outputFile = `${image.split('.')[0]}.html`;
+  const output = render(template, {
+    ...data,
+    url: `${process.env.VUE_APP_HOST_DOMAIN}share/${outputFile}`,
+    image: process.env.VUE_APP_HOST_DOMAIN + IMAGES_PATH + image
+  });
 
-  writeFileSync(OUTPUT_PATH + outputName, output);
+  writeFileSync(OUTPUT_PATH + outputFile, output);
 });
 
 console.log('Generating completed!');
