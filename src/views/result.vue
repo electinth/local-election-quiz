@@ -11,7 +11,7 @@
       {{ resultDetail.description }}
     </H3>
     <div class="flex flex-col md:flex-row py-4 px-10 space-y-4 space-x-4">
-      <LottiePlayer :animationData="animation" class="flex" />
+      <LottiePlayer :animationData="animation" class="flex max-w-md mx-auto" />
     </div>
     <div class="flex flex-col md:flex-row px-2">
       <SocialSharer :score="score" class="md:flex-1" />
