@@ -1,7 +1,7 @@
 <template>
   <div class="flex-1 flex flex-col bg-gray p-3 space-y-4">
     <QuizDisplay
-      class="flex-1 max-w-screen-lg m-auto"
+      class="flex-1 max-w-screen-md w-full m-auto"
       :quiz="currentQuiz"
       :progressText="progressText"
       @answer="onAnswerSubmitted"
