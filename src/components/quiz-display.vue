@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col space-y-4 md:space-y-6 py-4">
+  <div class="flex flex-col space-y-6 md:space-y-8 py-4">
     <p v-if="!selectedChoice" class="text-center">
       {{ progressText }}
     </p>
@@ -22,9 +22,9 @@
         <HorizontalLine />
       </div>
       <ChoiceButton :choice="correctChoice" isCorrect />
-      <P class="mx-2">
+      <p class="font-body text-16 md:text-20">
         {{ quiz.explanation }}
-      </P>
+      </p>
       <div class="flex flex-col">
         <button
           class="h-8 rounded-2xl hover:bg-white mx-auto m-6"

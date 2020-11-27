@@ -1,12 +1,14 @@
 <template>
-  <H3 class="py-1 px-2" :class="isCorrect ? 'bg-green' : 'bg-red'">
+  <p
+    class="py-1 px-2 font-body text-24 md:text-36"
+    :class="isCorrect ? 'bg-green' : 'bg-red'"
+  >
     {{ isCorrect ? 'ตอบถูก!' : 'ตอบผิด !' }}
-  </H3>
+  </p>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import H3 from './typography/h3.vue';
 
 export default defineComponent({
   props: {
@@ -14,9 +16,6 @@ export default defineComponent({
       type: Boolean,
       required: true
     }
-  },
-  components: {
-    H3
   }
 });
 </script>
