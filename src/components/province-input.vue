@@ -6,18 +6,23 @@
       class="w-full px-4 py-2 border-2"
       v-model.trim="keyword"
       @keypress.enter="keyword = filteredProvinces[0] || keyword"
+      @focus="isFocused = true"
+      @blur="isFocused = false"
     />
     <div class="relative">
-      <ul class="absolute flex flex-col top-0 inset-x-0 bg-white">
-        <li
-          v-for="province in filteredProvinces"
+      <div
+        class="absolute flex flex-col top-0 inset-x-0 bg-white appearance-none z-10"
+      >
+        <div
+          v-for="(province, index) in filteredProvinces"
           :key="province"
+          :tabindex="index"
           class="py-2 px-4 hover:bg-darkgray"
           @click="keyword = province"
         >
           {{ province }}
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -34,18 +39,18 @@ export default defineComponent({
   },
   setup(_, { emit }) {
     const keyword = ref<string>('');
+    const isFocused = ref<boolean>(false);
 
-    const filteredProvinces = computed(() => {
-      if (keyword.value) {
-        const matchedProvinces = provinces.filter(
-          province => province.indexOf(keyword.value) >= 0
-        );
+    const filteredProvinces = computed<string[]>(() => {
+      const matchedProvinces = provinces.filter(
+        province => province.indexOf(keyword.value) >= 0
+      );
 
-        if (matchedProvinces.length > 1) {
-          return matchedProvinces.slice(0, MAX_PROVINCES_DISPLAY);
-        } else if (matchedProvinces[0] !== keyword.value) {
-          return matchedProvinces;
-        }
+      if (
+        (isFocused.value && !keyword.value) ||
+        matchedProvinces[0] !== keyword.value
+      ) {
+        return matchedProvinces.slice(0, MAX_PROVINCES_DISPLAY);
       }
 
       return [];
@@ -62,7 +67,8 @@ export default defineComponent({
 
     return {
       keyword,
-      filteredProvinces
+      filteredProvinces,
+      isFocused
     };
   }
 });
