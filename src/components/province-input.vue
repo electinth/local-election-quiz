@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 flex flex-col">
+  <div class="flex flex-col">
     <input
       type="text"
       for="province"
@@ -7,7 +7,7 @@
       v-model.trim="keyword"
       @keypress.enter="keyword = filteredProvinces[0] || keyword"
       @focus="isFocused = true"
-      @blur="isFocused = false"
+      @blur="handleBlurWithDelay"
     />
     <div class="relative">
       <div
@@ -37,7 +37,7 @@ export default defineComponent({
   props: {
     modelValue: String
   },
-  setup(_, { emit }) {
+  setup(props, { emit }) {
     const keyword = ref<string>('');
     const isFocused = ref<boolean>(false);
 
@@ -47,8 +47,8 @@ export default defineComponent({
       );
 
       if (
-        (isFocused.value && !keyword.value) ||
-        matchedProvinces[0] !== keyword.value
+        (!keyword.value && isFocused.value) ||
+        (keyword.value && matchedProvinces[0] !== keyword.value)
       ) {
         return matchedProvinces.slice(0, MAX_PROVINCES_DISPLAY);
       }
@@ -65,10 +65,14 @@ export default defineComponent({
       );
     });
 
+    const handleBlurWithDelay = () =>
+      setTimeout(() => (isFocused.value = false), 500);
+
     return {
       keyword,
       filteredProvinces,
-      isFocused
+      isFocused,
+      handleBlurWithDelay
     };
   }
 });

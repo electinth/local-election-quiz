@@ -5,20 +5,22 @@
         >หากสะดวก
         รบกวนขอข้อมูลเพิ่มเติมเพื่อรวบรวมเป็นสถิติสำหรับการวิจัยของสถาบันฯ</H2
       >
-      <div
-        class="flex flex-col space-y-2 md:space-y-6 max-w-xs md:max-w-md mx-auto"
-      >
-        <div class="flex flex-row space-x-2">
-          <Label for="age" class="w-20 my-auto text-right">อายุ</Label>
+      <div class="flex flex-row space-x-2 max-w-xs md:max-w-md mx-auto">
+        <div class="flex flex-col space-y-2 md:space-y-6  text-right">
+          <div class="flex-1 flex justify-end">
+            <Label for="age" class="my-auto">อายุ</Label>
+          </div>
+          <div class="flex-1 flex justify-end">
+            <Label for="province" class="my-auto">จังหวัด</Label>
+          </div>
+        </div>
+        <div class="flex flex-1 flex-col space-y-2 md:space-y-6">
           <input
             type="number"
             id="age"
             v-model.number="age"
-            class="flex-1 px-4 py-2 border-2 appearance-none"
+            class="px-4 py-2 border-2 appearance-none"
           />
-        </div>
-        <div class="flex flex-row space-x-2">
-          <Label for="province" class="w-20 my-auto text-right">จังหวัด</Label>
           <ProvinceInput v-model="province" />
         </div>
         <P v-if="isDirty && isError" class="text-red text-center"
