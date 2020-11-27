@@ -11,15 +11,7 @@
       {{ resultDetail.description }}
     </H3>
     <div class="flex flex-col md:flex-row py-4 px-10 space-y-4 space-x-4">
-      <LottiePlayer
-        v-for="(animation, index) in animations"
-        :key="index"
-        :animationData="animation"
-        :config="{ autoplay: rank === index }"
-        :isPlaying="rank === index"
-        class="flex"
-        :class="{ 'opacity-25': rank !== index }"
-      />
+      <LottiePlayer :animationData="animation" class="flex" />
     </div>
     <div class="flex flex-col md:flex-row px-2">
       <SocialSharer :score="score" class="md:flex-1" />
@@ -75,11 +67,15 @@ export default defineComponent({
     SocialSharer
   },
   setup() {
+    const animations = [step1Animation, step2Animation, step3Animation];
     const score = inject(ProviderName.Score) as Ref<number>;
 
-    const rank = computed<Number>(() =>
-      (resultDetails as ResultDetail[]).findIndex(isScoreInRange(score.value))
-    );
+    const animation = computed(() => {
+      const index = (resultDetails as ResultDetail[]).findIndex(
+        isScoreInRange(score.value)
+      );
+      return animations[index];
+    });
 
     const resultDetail = computed<ResultDetail | undefined>(() =>
       (resultDetails as ResultDetail[]).find(isScoreInRange(score.value))
@@ -89,8 +85,7 @@ export default defineComponent({
       NUMBER_OF_SELECTED_QUIZ,
       score,
       resultDetail,
-      rank,
-      animations: [step1Animation, step2Animation, step3Animation]
+      animation
     };
   }
 });
