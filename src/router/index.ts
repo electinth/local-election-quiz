@@ -34,16 +34,22 @@ const routes: Array<RouteRecordRaw> = [
   }
 ];
 
-const redirectToHomeIfUserIdIsNotGenerated = (
-  { name }: RouteLocationNormalized,
+const isUserAccessPostQuizWithoutId = ({
+  name
+}: RouteLocationNormalized): boolean =>
+  name !== 'Home' &&
+  name !== 'Quiz' &&
+  !sessionStorage.getItem(ProviderName.UserId);
+
+const isRouteExist = ({ name }: RouteLocationNormalized) =>
+  routes.findIndex(route => route.name === name) > -1;
+
+const validateRoute = (
+  to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext
 ) => {
-  if (
-    name !== 'Home' &&
-    name !== 'Quiz' &&
-    !sessionStorage.getItem(ProviderName.UserId)
-  ) {
+  if (!isRouteExist(to) || isUserAccessPostQuizWithoutId(to)) {
     next({ name: 'Home', replace: true });
   } else {
     next();
@@ -55,6 +61,6 @@ const router = createRouter({
   routes
 });
 
-router.beforeEach(redirectToHomeIfUserIdIsNotGenerated);
+router.beforeEach(validateRoute);
 
 export default router;
