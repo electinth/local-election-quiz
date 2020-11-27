@@ -19,7 +19,8 @@ const OUTPUT_PATH = 'dist/share/';
 const data = {
   title: 'พร้อมแค่ไหน.. กับประชาธิปไตยใกล้มือ?',
   description: 'วัดความรู้ความเข้าใจเกี่ยวกับ เลือกตั้งท้องถิ่น',
-  baseUrl: process.env.VUE_APP_HOST_DOMAIN
+  baseUrl: process.env.VUE_APP_HOST_DOMAIN,
+  googleAnalyticsId: process.env.VUE_APP_GOOGLE_ANALYTICS_ID
 };
 
 const template = readFileSync(TEMPLATE_PATH, 'utf8') as string;
