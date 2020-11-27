@@ -1,11 +1,11 @@
 <template>
   <button
-    class="flex flex-row space-x-1 h-20 md:h-24"
+    class="flex flex-row space-x-1"
     @mouseenter="isHovering = true"
     @mouseleave="isHovering = false"
   >
     <div
-      class="flex-1 text-center rounded border-2 border-black px-2 flex h-full"
+      class="flex-1 flex text-center rounded border-2 border-black px-2 h-20 md:h-24"
       :class="[
         isCorrect
           ? 'text-white bg-black'
@@ -16,7 +16,7 @@
     >
       <H3 class="m-auto">{{ choice.label }}</H3>
     </div>
-    <div class="w-1/6 rounded border-2 bg-white p-1 md:p-2 h-full">
+    <div class="w-1/6 rounded border-2 bg-white p-1 md:p-2 h-20 md:h-24">
       <LottiePlayer
         :animationData="chooseAnimation"
         :config="{ autoplay: isCorrect }"
