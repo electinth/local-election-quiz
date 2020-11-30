@@ -32,7 +32,7 @@ export default defineComponent({
   setup(props) {
     const socialLinks = computed(() => {
       const encodedUrl = encodeURI(
-        `${process.env.VUE_APP_HOST_DOMAIN}share/${props.score}.html`
+        `${process.env.VUE_APP_SITE_DOMAIN}${process.env.VUE_APP_SITE_PATH}/share/${props.score}.html`
       );
 
       return [

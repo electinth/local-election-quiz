@@ -19,7 +19,8 @@ const OUTPUT_PATH = 'dist/share/';
 const data = {
   title: 'พร้อมแค่ไหน.. กับประชาธิปไตยใกล้มือ?',
   description: 'วัดความรู้ความเข้าใจเกี่ยวกับ เลือกตั้งท้องถิ่น',
-  baseUrl: process.env.VUE_APP_HOST_DOMAIN,
+  url: `${process.env.VUE_APP_SITE_DOMAIN}${process.env.VUE_APP_SITE_PATH}`,
+  sitePath: process.env.VUE_APP_SITE_PATH,
   googleAnalyticsId: process.env.VUE_APP_GOOGLE_ANALYTICS_ID
 };
 
@@ -38,8 +39,8 @@ images.forEach(image => {
   const outputFile = `${image.split('.')[0]}.html`;
   const output = render(template, {
     ...data,
-    url: `${process.env.VUE_APP_HOST_DOMAIN}share/${outputFile}`,
-    image: process.env.VUE_APP_HOST_DOMAIN + IMAGES_PATH + image
+    url: `${process.env.VUE_APP_SITE_DOMAIN}share/${outputFile}`,
+    image: process.env.VUE_APP_SITE_DOMAIN + IMAGES_PATH + image
   });
 
   writeFileSync(OUTPUT_PATH + outputFile, output);

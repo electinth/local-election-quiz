@@ -8,19 +8,19 @@
     <title>พร้อมแค่ไหน.. กับประชาธิปไตยใกล้มือ?</title>
     <meta name="description" content="วัดความรู้ความเข้าใจเกี่ยวกับเลือกตั้งท้องถิ่น">
 
-    <meta property="og:url" content="<%= process.env.VUE_APP_HOST_DOMAIN %>" />
+    <meta property="og:url" content="<%= process.env.VUE_APP_SITE_DOMAIN + process.env.VUE_APP_SITE_PATH %>" />
     <meta property="og:title" content="พร้อมแค่ไหน.. กับประชาธิปไตยใกล้มือ?" />
     <meta property="og:description" content="วัดความรู้ความเข้าใจเกี่ยวกับเลือกตั้งท้องถิ่น" />
-    <meta property="og:image" content="<%= process.env.VUE_APP_HOST_DOMAIN %>og/default.png" />
+    <meta property="og:image" content="<%= process.env.VUE_APP_SITE_DOMAIN + process.env.VUE_APP_SITE_PATH %>/og/default.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-43E8SP2D7M"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= process.env.VUE_APP_GOOGLE_ANALYTICS_ID %>"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-43E8SP2D7M');
+      gtag('config', '<%= process.env.VUE_APP_GOOGLE_ANALYTICS_ID %>');
     </script>
   </head>
   <body>
